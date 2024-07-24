@@ -12,12 +12,8 @@ public:
             int idx=0;
             string res="";
             for(int i=0;i<temp.size();++i){
-                // cout<<temp[i]-'0'<<endl;
                 res+=to_string(mapping[temp[i]-'0']);
-                // cout<<"mapping[temp[i]-'0'] "<<mapping[temp[i]-'0']<<endl;
-                // cout<<"res "<<res<<endl;
             }
-            // cout<<res<<endl;
             int new_mapping=stoi(res);
             vec.push_back({num,new_mapping});
         }
