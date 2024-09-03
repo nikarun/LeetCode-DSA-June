@@ -8,7 +8,7 @@ public:
         numericString+=to_string(baseValue);
      }  
      cout<<numericString<<endl; 
-     while(k>0){
+     while(k>0 && numericString.size()>1){
         int res=0;
         n=numericString.size();
         for(int i=0;i<n;++i){
