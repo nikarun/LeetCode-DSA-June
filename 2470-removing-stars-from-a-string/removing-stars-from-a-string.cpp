@@ -11,7 +11,6 @@ public:
             ++i;
         }
         if(st.empty()) return "";
-        cout<<st.top()<<endl;
         while(!st.empty()){
             res+=st.top();
             st.pop();
