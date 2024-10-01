@@ -3,28 +3,17 @@ public:
     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
         int n=nums1.size();
         int m=nums2.size();
-        unordered_map<int,int>mp1;
-        for(int p:nums2){
-            mp1[p]++;
+        unordered_set<int>s1(nums1.begin(),nums1.end());
+        unordered_set<int>s2(nums2.begin(),nums2.end());
+        vector<int>res1;
+        vector<int>res2;
+        for(int p:s1){
+            if(s2.count(p)==0) res1.push_back(p);
         }
-        unordered_map<int,int>mp2;
-        set<int>s1;
-        for(int p:nums1){
-            mp2[p]++;
-            if(mp1[p]==0) s1.insert(p);
+        for(int p:s2){
+            if(s1.count(p)==0) res2.push_back(p);
         }
-        vector<int>res1(s1.begin(),s1.end());
-        set<int>s2;
-        for(int p:nums2){
-            if(mp2[p]==0) s2.insert(p);
-        }
-
-        // for(auto it =mp.begin();it!=mp.end();++it){
-        //     if(it->second>0){
-        //         s2.insert(it->first);
-        //     }
-        // }
-        vector<int>res2(s2.begin(),s2.end());
         return {res1,res2};
+ 
     }
 };
