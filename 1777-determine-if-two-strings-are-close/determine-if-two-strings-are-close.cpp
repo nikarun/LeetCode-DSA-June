@@ -2,27 +2,22 @@ class Solution {
 public:
     bool closeStrings(string word1, string word2) {
         if(word1.size()!=word2.size()) return false;
-        unordered_map<char,int>mp1;
-        for(char p:word2){
-            mp1[p]++;
+        vector<int>w1(26,0);
+        vector<int>w2(26,0);
+        set<char>s1;
+        set<char>s2;
+        for(char p:word1){
+            s1.insert(p);
+            w1[p-'a']++;
         }
-        unordered_map<char,int>mp2;
 
-        for(char t:word1){
-            mp2[t]++;
-            if(mp1[t]==0) return false;
+        for(char p:word2){
+            s2.insert(p);
+            w2[p-'a']++;
         }
-        vector<int>vec1;
-        vector<int>vec2;
-        for(auto it=mp1.begin();it!=mp1.end();++it){
-            vec1.push_back(it->second);
-        }
-        for(auto it=mp2.begin();it!=mp2.end();++it){
-            vec2.push_back(it->second);
-        }
-        sort(vec1.begin(),vec1.end());
-        sort(vec2.begin(),vec2.end());
-        return vec1==vec2;
+        sort(w1.begin(),w1.end());
+        sort(w2.begin(),w2.end());
+        return w1==w2 && s1==s2;
         // return true;
     }
 };
