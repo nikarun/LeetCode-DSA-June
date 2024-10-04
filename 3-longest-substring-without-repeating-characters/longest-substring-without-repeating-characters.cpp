@@ -4,18 +4,14 @@ public:
         int n=s.size();
         if(n==0) return 0;
         unordered_map<char,int>mp;
-        int len=0;
-        int start=0;
-        for(int i=0;i<n;++i){
-            if(mp.find(s[i])==mp.end()){
-                mp[s[i]]=i;
+        int i=0,res=0;
+        for(int j=0;j<n;++j){
+            if(mp.find(s[j])!=mp.end()){
+                i=max(i,mp[s[j]]+1);
             }
-            else{
-                start=max(start,mp[s[i]]+1);
-                mp[s[i]]=i;
-            }
-            len=max(len,i-start+1);
+            res=max(res,j-i+1);
+            mp[s[j]]=j;
         }
-        return len;
+        return res;
     }
 };
