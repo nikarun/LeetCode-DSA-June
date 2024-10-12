@@ -1,28 +1,33 @@
 class Solution {
 public:
-    bool isGraphBipartite(int src, int colour, vector<bool>&vis, vector<int>&colours,vector<vector<int>>& graph){
-        if(vis[src]){
-            return colours[src]==colour;
-        }
-        colours[src]=colour;
-        vis[src]=true;
-        int child_colour=colour==0?1:0;
-        for(int i=0;i<graph[src].size();++i){
-            if(!isGraphBipartite(graph[src][i],child_colour,vis,colours,graph)){
-                return false;
+    bool isBipartiteBfs(int src, vector<vector<int>>& graph, vector<int>&colours, vector<bool>&vis){
+        queue<int>q;
+        q.push(src);
+        colours[src]=0;
+        while(!q.empty()){
+            int top=q.front();
+            vis[top]=true;
+            q.pop();
+            for(int i=0;i<graph[top].size();++i){
+                int child_colour=colours[top]==0?1:0;
+                if(colours[graph[top][i]]!=-1 && colours[graph[top][i]]!=child_colour) return false;
+                colours[graph[top][i]] = child_colour;
+                if(!vis[graph[top][i]]){
+                    q.push(graph[top][i]);
+                }
+
             }
         }
         return true;
-        
     }
     bool isBipartite(vector<vector<int>>& graph) {
         int n=graph.size();
-        vector<bool>is_visited(n,false);
-        vector<int>colour(n,-1);
+        vector<int>colours(n,-1);
+        vector<bool>vis(n,false);
         for(int i=0;i<n;++i){
-            if(!is_visited[i]){
-                if(!isGraphBipartite(i,0,is_visited,colour,graph)) return false;
-            } 
+            if(!vis[i]){
+                if(!isBipartiteBfs(i,graph, colours, vis)) return false;
+            }
         }
         return true;
     }
