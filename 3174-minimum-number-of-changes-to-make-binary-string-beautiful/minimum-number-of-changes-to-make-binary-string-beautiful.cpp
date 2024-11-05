@@ -1,6 +1,7 @@
 class Solution {
 public:
     int minChanges(string s) {
+        // for minimum change take pair of size 2
         int n=s.size();
         if(n==0) return 0;
         int res=0;
