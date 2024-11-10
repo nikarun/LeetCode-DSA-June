@@ -18,14 +18,12 @@ public:
         vector<int>res;
         while(!q.empty()){
             int size=q.size();
-            for(int i=0;i<size;++i){
-                TreeNode *curr=q.front();
+            while(size-->0){
+                TreeNode *front=q.front();
                 q.pop();
-                if(i==size-1){
-                    res.push_back(curr->val);
-                }
-                if(curr->left) q.push(curr->left);
-                if(curr->right) q.push(curr->right);
+                if(size==0) res.push_back(front->val);
+                if(front->left) q.push(front->left);
+                if(front->right) q.push(front->right);
             }
         }
         return res;
