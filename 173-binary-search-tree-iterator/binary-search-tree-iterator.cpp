@@ -12,7 +12,6 @@
 class BSTIterator {
 public:
     queue<TreeNode*>q;
-    TreeNode *ptr=NULL;
     void dfs(TreeNode *root){
         if(root==NULL) return;
         dfs(root->left);
@@ -26,7 +25,6 @@ public:
     int next() {
         TreeNode *temp=q.front();
         q.pop();
-        ptr=temp;
         return temp->val;
     }
     
