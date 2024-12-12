@@ -33,8 +33,6 @@ class RandomizedSet {
     }
     
     public int getRandom() {
-        System.out.println(new Random().nextInt(l.size()));
-        System.out.println(l.get(0));
         return l.get(new Random().nextInt(l.size()));
     }
 }
