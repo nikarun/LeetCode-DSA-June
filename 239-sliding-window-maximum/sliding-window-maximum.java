@@ -1,18 +1,15 @@
-import java.util.*;
-
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        //use dequeue indescending order 
         int size=nums.length;
-        int[] result = new int[size - k + 1];
-
-        Deque<Integer>dq = new ArrayDeque<>();
-        int j=0;
-        for(int i=0;i<size;++i){
-            while(!dq.isEmpty() && i-k==dq.peekFirst()) dq.removeFirst();
-            while(!dq.isEmpty() && nums[dq.peekLast()]<nums[i]) dq.removeLast();
+        int[] result=new int[size-k+1];
+        Deque<Integer>dq=new ArrayDeque<>();
+        int i=0,j=0;
+        while(i<size){
+            while(!dq.isEmpty() && dq.peekFirst()==i-k) dq.removeFirst(); //when first element is not valid
+            while(!dq.isEmpty() && nums[dq.peekLast()]<nums[i]) dq.removeLast();//monotonic
             dq.offerLast(i);
             if(i>=k-1) result[j++]=nums[dq.peekFirst()];
+            ++i;
         }
         return result;
     }
