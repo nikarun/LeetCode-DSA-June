@@ -11,24 +11,24 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        int count=0;
-        ListNode *ptr=head;
+        if(head==NULL) return NULL;
+        int len=0;
+        ListNode* ptr=head;
         while(ptr){
-            ++count;
+            ++len;
             ptr=ptr->next;
         }
-        if(count<k) return head;
-        ListNode *prev=NULL, *next=head, *curr=head;
-        // ptr=head;
-        int p=k;
-        while(curr && p>0){
-            next=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=next;
-            --p;
+        if(k>len) return head;
+        int t=k;
+        ListNode *prev=NULL;
+        ptr=head;
+        while(ptr && --t>=0){
+            ListNode *next=ptr->next;
+            ptr->next=prev;
+            prev=ptr;
+            ptr=next;
         }
-        head->next=reverseKGroup(curr,k);
+        head->next=reverseKGroup(ptr,k);
         return prev;
     }
 };
