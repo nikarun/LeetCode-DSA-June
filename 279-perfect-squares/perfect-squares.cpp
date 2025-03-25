@@ -2,14 +2,22 @@ class Solution {
 public:
     int numSquares(int n) {
         if(n==0) return 0;
-        vector<int>dp(n+1,99999);
-        dp[0]=0;
+        vector<int>dp;
         for(int i=1;i<=n;++i){
-            for(int j=1;j*j<=i;++j){
-                dp[i]=min(dp[i],dp[i-j*j]+1);
+            if(i*i<=n){
+                dp.push_back(i*i);
+            }
+            else break;
+        }
+        vector<int>coin_change(n+1,n+1);
+        coin_change[0]=0;
+        for(int i=1;i<=n;++i){
+            for(int j=0;j<dp.size();++j){
+                if(dp[j]<=i){
+                    coin_change[i]=min(coin_change[i],coin_change[i-dp[j]]+1);
+                }
             }
         }
-        return dp[n];
+        return coin_change[n];
     }
 };
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
