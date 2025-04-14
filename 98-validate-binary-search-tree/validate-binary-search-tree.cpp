@@ -11,19 +11,19 @@
  */
 class Solution {
 public:
-    bool isValid(TreeNode *root, int *lower, int *upper){
-        if(root==NULL) return true;
-        if(lower){
-            if(root->val<=*lower) return false;
+    bool isBStValid=true;
+    void dfs(TreeNode *root, TreeNode *lower, TreeNode *higher){
+        if(root==NULL) return ;
+        dfs(root->left,lower,root);
+        if((lower &&  root->val<=lower->val) || (higher && root->val>=higher->val)){
+            isBStValid=false;;
         }
-        if(upper){
-            if(root->val>=*upper) return false;
-        }
-        // if(root->val<=lower || root->val>=upper) return false;
-        return isValid(root->left,lower,&(root->val)) && isValid(root->right,&(root->val),upper);
+        dfs(root->right,root,higher);
+        
     }
     bool isValidBST(TreeNode* root) {
         if(root==NULL) return true;
-        return isValid(root,NULL,NULL);
+        dfs(root,NULL,NULL);
+        return isBStValid;
     }
 };
