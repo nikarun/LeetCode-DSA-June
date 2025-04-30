@@ -14,15 +14,21 @@ public:
     int countNodes(TreeNode* root) {
         int cntr=0;
         if(root==NULL) return 0;
-        queue<TreeNode*>q;
-        q.push(root);
-        while(!q.empty()){
-            TreeNode * front=q.front();
-            q.pop();
-            if(front->left) q.push(front->left);
-            if(front->right) q.push(front->right);
-            ++cntr;
+        int lh=0;
+        TreeNode *left=root;
+        while(left){
+            ++lh;
+            left=left->left;
         }
-        return cntr;
+        int rh=0;
+        TreeNode *right=root;
+        while(right){
+            ++rh;
+            right=right->right;
+        }
+        if(lh==rh){
+            return pow(2,lh)-1;
+        }
+        return 1+countNodes(root->left)+countNodes(root->right);
     }
 };
